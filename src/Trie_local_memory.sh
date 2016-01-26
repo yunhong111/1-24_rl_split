@@ -14,7 +14,7 @@ interval=(2000000 5000000 10000000 20000000 50000000 100000000)
 blackKeySize=(500 1000 1500 2000 4000 8000)
 
 count=(0 1 2 3 4 5 6 7 8 9 10)
-for i in $(seq 0 10)
+for i in $(seq 0 9)
 
 do
 	export OMP_NUM_THREADS=8
