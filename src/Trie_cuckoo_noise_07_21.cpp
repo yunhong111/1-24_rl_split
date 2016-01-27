@@ -1385,7 +1385,7 @@ void selectAction(RLearn** rLearn[], int actionSize, int switchNum, size_tss& sl
                     qSum.sum = qVecs[si][0][i1].qValue + qVecs[si][1][i2].qValue;
 
                     // all actions should be constrainted by the blacklist volume
-                    if(qSum.actionSum == CUCKOO_BLACK_SIZE)
+                    if(qSum.actionSum <= CUCKOO_BLACK_SIZE)
                         qSums[si].push_back(qSum);
                 }
             }
@@ -1407,6 +1407,12 @@ void selectAction(RLearn** rLearn[], int actionSize, int switchNum, size_tss& sl
         }
     }
 
+	// expand the selected slots number to satisfy qSum.actionSum == CUCKOO_BLACK_SIZE
+	for(int si = 0; si < switchNum; si++)
+    {
+        standard_data(rLearn[si], slotNums[si], CUCKOO_BLACK_SIZE);
+	}
+	
     // find the index of the selected action
     cout<<"* find the index of selected action!"<<endl;
 
@@ -1630,6 +1636,24 @@ double nextTime(double rateParameter)
         exit(0);
     }
     return nTime;
+}
+
+void standard_data(RLearn* rLearn[], size_ts& x, float data_max)
+{
+	float sum = 0;
+	for (size_t i = 0; i < x.size(); i++)
+	{
+		sum += x[i];//pow(x[i],2);
+	}
+	//sum = sqrt(sum);
+	for (size_t i = 0; i < x.size(); i++)
+	{
+		x[i] = data_max*x[i]/sum;
+		cout<<"* standard_data:x[i]: "<<x[i]<<endl;
+		x[i] = rLearn[i]->findDisceteValue(x[i],1);
+	}
+	
+	
 }
 
 

@@ -17,7 +17,7 @@ count=(0 1 2 3 4 5 6 7 8 9 10)
 for i in $(seq 0 9)
 
 do
-	export OMP_NUM_THREADS=8
+	export OMP_NUM_THREADS=4
 	
 	./rl_msw ${keyFile} ${memSize[0]} ${ipfileFolder} ${feedbackPortion[2]} ${interval[0]} ${blackKeySize[1]} ${count[i]}
 

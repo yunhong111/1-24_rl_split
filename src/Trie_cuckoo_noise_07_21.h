@@ -71,4 +71,6 @@ int actionSize, intss& uniqueActs,
 
 double nextTime(double rateParameter);
 
+void standard_data(RLearn* rLearn[], size_ts& x, float data_max);
+
 
